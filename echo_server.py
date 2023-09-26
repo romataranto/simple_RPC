@@ -53,7 +53,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
             # series of if statements that will excecute based on operation
             # note useage of f-strings for improved readability
-            if operation == "LCM":
+            if operation == "LCM" or operation == "lcm":
                 # uses math library's built in LCM function
                 LCM = math.lcm(first_num,second_num)
 
@@ -63,7 +63,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
                 # converts integer to bytes and sends back to client
                 conn.sendall(bytes(str(LCM), 'utf-8'))
-            elif operation == "mean":
+            elif operation == "mean" or operation == "Mean":
                 # basic calculation for mean
                 mean = (first_num + second_num) / 2
 
