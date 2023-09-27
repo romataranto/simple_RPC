@@ -17,11 +17,11 @@ PORT = 65432  # The port used by the server
 # prompting the user for two numbers
 numbers = input("give two numbers, separated by a comma: ")
 
-# checks to make sure the input for numbers is allowed (ie. is an integer)
+# checks to make sure the input for numbers is allowed (ie. is a float)
 # checks to make sure a comma was provided to separate input numbers
-# only breaks once valid numbers have been provided
+# only breaks infinite loop once valid numbers have been provided
 while True:
-    flag = False
+    flag = False # using flag to break out of the if statement, but not infinite loop
     try:
         if ',' in numbers and not flag:
             flag = True
@@ -40,21 +40,14 @@ operation = input("would you like the server to find the LCM or the mean? ")
 
 # checks to make sure that a valid operation was chosen
 while True:
+    # LCM of zero cannot be calculated, so the following if statement will change the operation to mean if
+    #   zero is one of the provided numbers
     if operation in ("LCM", "lcm") and (first_num == 0 or second_num == 0):
         print("LCM of zero cannot be computed. sending a command to the server in 5 seconds to compute the mean instead of LCM.")
         operation = "mean"
-        time.sleep(1)
-        print ("5")
-        time.sleep(1)
-        print ("4")
-        time.sleep(1)
-        print ("3")
-        time.sleep(1)
-        print ("2")
-        time.sleep(1)
-        print ("1")
-        time.sleep(1)
-        print ("0")
+        for i in range(5, -1, -1):
+            print(i)
+            time.sleep(1)
         break
     elif operation in ("LCM", "lcm", "mean", "Mean"):
         print("the provided operation has been accepted")
@@ -87,8 +80,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 #################################### RECEIVING RESPONSE ####################################
 
 # after the server has sent the response, the client converts back from bytes to
-#   a string and displays this to the user
-rounded_response = round(float(data.decode('utf-8')), 2)
+#   a string to a rounded float and displays this to the user
+rounded_response = round(float(data.decode('utf-8')), 2) # round to 2 decimals
 print(f"received response: {rounded_response} [{len(data)} bytes]")
 
 # if response from server is an error message, let the user knoew
