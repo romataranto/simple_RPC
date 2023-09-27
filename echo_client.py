@@ -25,11 +25,11 @@ while True:
     try:
         if ',' in numbers and not flag:
             flag = True
-        else:
+        elif not flag:
             numbers = input("a comma was not included in your input for numbers. please submit two numbers separated by a comma: ")
 
-        first_num = int(numbers.split(",")[0])
-        second_num = int(numbers.split(",")[1])
+        first_num = float(numbers.split(",")[0])
+        second_num = float(numbers.split(",")[1])
         print("the provided numbers have been accepted")
         break
     except ValueError:
@@ -88,7 +88,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
 # after the server has sent the response, the client converts back from bytes to
 #   a string and displays this to the user
-print(f"received response: {data.decode('utf-8')} [{len(data)} bytes]")
+rounded_response = round(float(data.decode('utf-8')), 2)
+print(f"received response: {rounded_response} [{len(data)} bytes]")
 
 # if response from server is an error message, let the user knoew
 if data.decode('utf-8') == "ERROR: Invalid operation":

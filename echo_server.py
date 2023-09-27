@@ -56,9 +56,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             # note useage of f-strings for improved readability
             if operation == "LCM" or operation == "lcm":
                 # uses math library's built in LCM function
-                LCM = math.lcm(first_num,second_num)
+                LCM = math.lcm(int(first_num),int(second_num))
 
-                # tracing to let the user know the result
+                # tracing to let the user know the 
                 print(f"The LCM of {first_num} and {second_num} is {LCM}")
                 print("sending result back to client")
 
