@@ -45,8 +45,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             print("requested arguments: " + both_numbers)
 
             # separating the numbers with a comma as the delimiter
-            first_num = int(both_numbers.split(",")[0])
-            second_num = int(both_numbers.split(",")[1])
+            # converting to float instead of int in case user inputs large number
+            first_num = float(both_numbers.split(",")[0])
+            second_num = float(both_numbers.split(",")[1])
 
             # tracing to let the user know what the server is performing
             print(f"computing {operation} of {both_numbers}")

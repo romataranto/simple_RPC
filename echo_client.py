@@ -17,28 +17,23 @@ PORT = 65432  # The port used by the server
 # prompting the user for two numbers
 numbers = input("give two numbers, separated by a comma: ")
 
+# checks to make sure the input for numbers is allowed (ie. is an integer)
 # checks to make sure a comma was provided to separate input numbers
 # only breaks once valid numbers have been provided
 while True:
+    flag = False
     try:
-        first_num = numbers.split(",")[0]
-        second_num = numbers.split(",")[1]
-        break
-    except ValueError:
-        numbers = input("a comma was not included in your input for numbers. please submit two numbers separated by a comma: ")
+        if ',' in numbers and not flag:
+            flag = True
+        else:
+            numbers = input("a comma was not included in your input for numbers. please submit two numbers separated by a comma: ")
 
-# checks to make sure the input for numbers is allowed (ie. is an integer)
-while True:
-    try:
-        first_num = int(first_num)
-        second_num = int(second_num)
+        first_num = int(numbers.split(",")[0])
+        second_num = int(numbers.split(",")[1])
         print("the provided numbers have been accepted")
         break
     except ValueError:
         numbers = input("invalid input for numbers. please input two numbers separated by a comma: ")
-        # need to re-split the new input for re-analysis
-        first_num = numbers.split(",")[0]
-        second_num = numbers.split(",")[1]
 
 # prompting the user to choose an operation
 operation = input("would you like the server to find the LCM or the mean? ")
